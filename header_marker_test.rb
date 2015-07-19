@@ -10,14 +10,17 @@ require './paragraph_marker_test'
 
 class HeaderMarkerTest < Minitest::Test
   def test_blank_strand
+    #changed to a blank array since joiner and splitter were
+    #removed from paragraph and header classes
     hm = HeaderMarker.new
-    assert_equal "", hm.mark_headers("")
+    assert_equal "", hm.mark_headers([""])
   end
 
-  def test_that_lines_are_separated_on_chunk
-    hm = HeaderMarker.new
-    assert_equal ["Does", "This", "Separate"], hm.paragraph_splitter("Does\n\nThis\n\nSeparate")
-  end
+  # def test_that_lines_are_separated_on_chunk
+  #   skip #paragraph now enters the header class as an array split on \n\n already
+  #   hm = HeaderMarker.new
+  #   assert_equal ["Does", "This", "Separate"], hm.paragraph_splitter("Does\n\nThis\n\nSeparate")
+  # end
 
   def test_for_not_adding_tags_at_line_not_beginning_in_a_hash
     hm = HeaderMarker.new
@@ -46,7 +49,7 @@ class HeaderMarkerTest < Minitest::Test
 
   def test_that_it_all_works_together
     hm = HeaderMarker.new
-    assert_equal "Does\n\nthis\n\njoin\neven\n\n<h1>though</h1>\n\n<h2>it seems more</h2>\n\n<h5>complex?</h5>", hm.mark_headers("Does\n\nthis\n\njoin\neven\n\n# though\n\n## it seems more\n\n##### complex?")
+    assert_equal "Does\n\nthis\n\njoin\neven\n\n<h1>though</h1>\n\n<h2>it seems more</h2>\n\n<h5>complex?</h5>", hm.mark_headers(["Does", "this", "join\neven", "# though", "## it seems more", "##### complex?"])
   end
 
 end

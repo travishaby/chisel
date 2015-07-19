@@ -3,15 +3,15 @@ require './paragraph_marker'
 class HeaderMarker
 
   def mark_headers(text_input)
-    split_text = paragraph_splitter(text_input)
-    tagged_text = header_tag_adder(split_text)
+    # split_text = paragraph_splitter(text_input)
+    tagged_text = header_tag_adder(text_input)
     joined_text = text_joiner(tagged_text)
     joined_text
   end
 
-  def paragraph_splitter(incoming_text)
-    incoming_text.split("\n\n")
-  end
+  # def paragraph_splitter(incoming_text)
+  #   incoming_text.split("\n\n")
+  # end
 
   def header_tag_adder(incoming_text)
     tagged_text = incoming_text.map do |line|

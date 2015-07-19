@@ -9,8 +9,10 @@ require './paragraph_marker'
 
 class ParagraphMarkerTest < Minitest::Test
   def test_blank_strand
+    #changed to a blank array since joiner and splitter were
+    #removed from paragraph and header classes
     pm = ParagraphMarker.new
-    assert_equal "", pm.mark_paragraphs("")
+    assert_equal [], pm.mark_paragraphs("")
   end
 
   def test_that_lines_are_separated_on_chunk
@@ -38,13 +40,15 @@ class ParagraphMarkerTest < Minitest::Test
     assert_equal ["#Some", "<p>of\nThese</p>", "#should", "<p>get</p>", "#tagged"], pm.tag_adder(["#Some", "of\nThese", "#should", "get", "#tagged"])
   end
 
-  def test_that_short_array_is_joined_with_proper_paragraph_spacing
-    pm = ParagraphMarker.new
-    assert_equal "<p>Does</p>\n\n<p>This</p>\n\n<p>Join</p>", pm.line_joiner(["<p>Does</p>", "<p>This</p>", "<p>Join</p>"])
-  end
+  # def test_that_short_array_is_joined_with_proper_paragraph_spacing
+  #   skip #removed joiner piece, just passing along the array to the next class
+  #   pm = ParagraphMarker.new
+  #   assert_equal "<p>Does</p>\n\n<p>This</p>\n\n<p>Join</p>", pm.line_joiner(["<p>Does</p>", "<p>This</p>", "<p>Join</p>"])
+  # end
 
   def test_the_whole_process
+    #changed to return array when i removed splitter and joiner between paragraph and header classes
     pm = ParagraphMarker.new
-    assert_equal "#Some\n\n<p>of\nThese</p>\n\n#should\n\n<p>get</p>\n\n#tagged", pm.mark_paragraphs("#Some\n\nof\nThese\n\n#should\n\nget\n\n#tagged")
+    assert_equal ["#Some", "<p>of\nThese</p>", "#should", "<p>get</p>", "#tagged"], pm.mark_paragraphs("#Some\n\nof\nThese\n\n#should\n\nget\n\n#tagged")
   end
 end

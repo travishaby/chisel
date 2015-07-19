@@ -3,8 +3,9 @@ class ParagraphMarker
   def mark_paragraphs(text_input)
     split_text = paragraph_splitter(text_input)
     tagged_text = tag_adder(split_text)
-    joined_text = line_joiner(tagged_text)
-    joined_text
+    tagged_text
+    # joined_text = line_joiner(tagged_text)
+    # joined_text
   end
 
   def paragraph_splitter(text)
@@ -22,9 +23,9 @@ class ParagraphMarker
     tagged_text
   end
 
-  def line_joiner(incoming_text)
-    incoming_text.join("\n\n")
-  end
+  # def line_joiner(incoming_text)
+  #   incoming_text.join("\n\n")
+  # end
 
 end
 
