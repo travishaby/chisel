@@ -15,7 +15,7 @@ class ParagraphMarker
   def tag_adder(split_text)
     tagged_text = split_text.map do |line|
       if line[0] != "#" && line[0] != "1" && line[0] != "*"
-        "<p>" + line + "</p>"
+        "<p>\n" + line + "\n</p>"
       else
         line
       end
